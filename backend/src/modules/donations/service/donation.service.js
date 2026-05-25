@@ -5,14 +5,14 @@ const { getPaginationParams, paginatedResponse } = require('../../../utils/pagin
 class DonationService {
   async donate(followerId, { creator_id, quantity, support_type }) {
     if (followerId === creator_id) {
-      const err = new Error('Cannot donate to yourself');
+      const err = new Error('donacion no puede ser para uno mismo');
       err.statusCode = 400;
       throw err;
     }
 
     const creator = await User.findOne({ where: { id: creator_id, role: 'CREATOR' } });
     if (!creator) {
-      const err = new Error('Creator not found');
+      const err = new Error('Creador no encontrado para la donacion');
       err.statusCode = 404;
       throw err;
     }

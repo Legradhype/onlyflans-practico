@@ -57,7 +57,7 @@ export function AuthProvider({ children }) {
   }, [persist])
 
   const logout = useCallback(async () => {
-    try { await authApi.logout() } catch { /* ignore */ }
+    try { await authApi.logout() } catch {}
     clear()
   }, [clear])
 

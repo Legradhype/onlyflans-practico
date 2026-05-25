@@ -16,7 +16,7 @@ class CreatorService {
   async getById(id) {
     const creator = await creatorRepository.findById(id);
     if (!creator) {
-      const err = new Error('Creator not found');
+      const err = new Error('Creador no encontrado');
       err.statusCode = 404;
       throw err;
     }
@@ -43,12 +43,12 @@ class CreatorService {
   async updateGoal(goalId, creatorId, body) {
     const goal = await creatorRepository.findGoalById(goalId);
     if (!goal) {
-      const err = new Error('Goal not found');
+      const err = new Error('Goal no encontrado');
       err.statusCode = 404;
       throw err;
     }
     if (goal.creator_id !== creatorId) {
-      const err = new Error('Forbidden');
+      const err = new Error('Acceso denegado');
       err.statusCode = 403;
       throw err;
     }

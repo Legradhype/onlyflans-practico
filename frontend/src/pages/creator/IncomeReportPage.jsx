@@ -3,9 +3,12 @@ import { creatorsApi } from '../../api/creators.api'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import ErrorMessage from '../../components/ErrorMessage'
 
-function formatDate(d) {
-  // Cambiado a formato en español
-  return new Date(d).toLocaleDateString('es-ES', { month: 'short', day: 'numeric', year: 'numeric' })
+
+function formatDate(dateStr) {
+  if (!dateStr) return '';
+  const date = new Date(dateStr);
+  if (isNaN(date.getTime())) return '';
+  return date.toLocaleDateString('es-BO', { month: 'short', day: 'numeric', year: 'numeric' })
 }
 
 export default function IncomeReportPage() {
@@ -60,7 +63,10 @@ export default function IncomeReportPage() {
           </div>
           <button onClick={load} className="btn-primary" id="apply-filters">Aplicar</button>
           <button
-            onClick={() => { setFilters({ start_date: '', end_date: '' }) }}
+            onClick={() => { 
+              setFilters({ start_date: '', end_date: '' })
+              setTimeout(() => document.getElementById('apply-filters').click(), 0)
+            }}
             className="btn-secondary"
             id="clear-filters"
           >Limpiar</button>
@@ -104,7 +110,7 @@ export default function IncomeReportPage() {
                         <td className="px-6 py-3 text-sm">
                           <span className="text-brand-400 font-bold">🥞 {d.quantity}</span>
                         </td>
-                        <td className="px-6 py-3 text-sm text-gray-400">{formatDate(d.created_at)}</td>
+                        <td className="px-6 py-3 text-sm text-gray-400">{formatDate(d.created_at || d.createdAt)}</td>
                       </tr>
                     ))}
                   </tbody>

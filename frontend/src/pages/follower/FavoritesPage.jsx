@@ -20,7 +20,7 @@ export default function FavoritesPage() {
     try {
       await favoritesApi.remove(creatorId)
       setFavorites((prev) => prev.filter((c) => c.id !== creatorId))
-    } catch { /* ignorar el error silenciado */ }
+    } catch {}
   }
 
   if (loading) return <LoadingSpinner size="lg" className="py-20" />

@@ -56,7 +56,6 @@ export default function DashboardPage() {
           )}
         </div>
         <div className="px-6 pb-6">
-          {/* 👇 AQUÍ ESTÁ LA MAGIA: Agregamos "relative z-10" y ajustamos a "-mt-12" */}
           <div className="relative z-10 flex items-end gap-4 -mt-12 mb-4">
             <Avatar
               src={cp?.profile_picture_url}

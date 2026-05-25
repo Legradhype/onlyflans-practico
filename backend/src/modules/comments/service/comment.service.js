@@ -6,7 +6,7 @@ class CommentService {
   async create(userId, role, { post_id, content }) {
     const post = await Post.findByPk(post_id);
     if (!post) {
-      const err = new Error('Post not found');
+      const err = new Error('Post no encontrado');
       err.statusCode = 404;
       throw err;
     }

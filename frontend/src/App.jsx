@@ -1,19 +1,17 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { useAuth } from './hooks/useAuth'
 
-// Layouts
+
 import AuthLayout from './layouts/AuthLayout'
 import MainLayout from './layouts/MainLayout'
 
-// Route guards
+
 import ProtectedRoute from './routes/ProtectedRoute'
 import RoleRoute from './routes/RoleRoute'
 
-// Auth Pages
 import LoginPage from './pages/auth/LoginPage'
 import RegisterPage from './pages/auth/RegisterPage'
 
-// Creator Pages
 import DashboardPage from './pages/creator/DashboardPage'
 import EditProfilePage from './pages/creator/EditProfilePage'
 import CreateGoalPage from './pages/creator/CreateGoalPage'

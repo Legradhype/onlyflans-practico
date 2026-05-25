@@ -13,7 +13,6 @@ export default function FeedPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
-  // Extraemos la lógica a una función para poder llamarla desde el botón
   const loadFeed = async () => {
     setLoading(true)
     setError('')
@@ -26,8 +25,6 @@ export default function FeedPage() {
       setLoading(false)
     }
   }
-
-  // Se ejecuta automáticamente al entrar a la página
   useEffect(() => {
     loadFeed()
   }, [])
@@ -38,8 +35,6 @@ export default function FeedPage() {
     <div className="animate-fade-in">
       <div className="flex items-center justify-between mb-6">
         <h1 className="section-title mb-0">🏠 Tu Feed</h1>
-        
-        {/* Botón para actualizar manualmente sin recargar la página */}
         <button
           onClick={loadFeed}
           className="btn-secondary text-sm py-1.5 px-3 flex items-center gap-1"
