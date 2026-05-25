@@ -31,7 +31,7 @@ const Post = sequelize.define(
     validate: {
       hasContent() {
         if (!this.text_content && !this.image_url) {
-          throw new Error('Post must have text content or an image.');
+          throw new Error('Posteaje debe tener texto o imagen');
         }
       },
     },

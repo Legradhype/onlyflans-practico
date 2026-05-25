@@ -8,7 +8,7 @@ const { createPostValidation, creatorIdParam } = require('../validation/post.val
 
 const router = Router();
 
-// Creator: create post
+
 router.post(
   '/',
   authenticateToken,
@@ -19,13 +19,12 @@ router.post(
   createPost
 );
 
-// Creator: own posts
+
 router.get('/mine', authenticateToken, authorizeRole('CREATOR'), getOwnPosts);
 
-// Follower: feed
+
 router.get('/feed', authenticateToken, authorizeRole('FOLLOWER'), getFeed);
 
-// Follower: creator's posts (donation-gated)
 router.get('/creator/:creatorId', authenticateToken, creatorIdParam, validate, getByCreator);
 
 module.exports = router;

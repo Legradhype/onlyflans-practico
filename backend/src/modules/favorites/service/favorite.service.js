@@ -4,21 +4,21 @@ const { User } = require('../../../database');
 class FavoriteService {
   async add(followerId, creatorId) {
     if (followerId === creatorId) {
-      const err = new Error('Cannot favorite yourself');
+      const err = new Error('No puedes seguirte a ti mismo');
       err.statusCode = 400;
       throw err;
     }
 
     const creator = await User.findOne({ where: { id: creatorId, role: 'CREATOR' } });
     if (!creator) {
-      const err = new Error('Creator not found');
+      const err = new Error('Creador no encontrado');
       err.statusCode = 404;
       throw err;
     }
 
     const alreadyFavorited = await favoriteRepository.exists(followerId, creatorId);
     if (alreadyFavorited) {
-      const err = new Error('Already in favorites');
+      const err = new Error('Ya está en favoritos');
       err.statusCode = 409;
       throw err;
     }
@@ -29,11 +29,11 @@ class FavoriteService {
   async remove(followerId, creatorId) {
     const deleted = await favoriteRepository.remove(followerId, creatorId);
     if (!deleted) {
-      const err = new Error('Favorite not found');
+      const err = new Error('Favorito no encontrado');
       err.statusCode = 404;
       throw err;
     }
-    return { message: 'Removed from favorites' };
+    return { message: 'Eliminado de favoritos' };
   }
 
   async getFavorites(followerId) {

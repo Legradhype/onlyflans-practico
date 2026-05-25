@@ -4,7 +4,7 @@ class UserService {
   async getMe(id) {
     const user = await userRepository.findById(id);
     if (!user) {
-      const err = new Error('User not found');
+      const err = new Error('Usuario no encontrado');
       err.statusCode = 404;
       throw err;
     }

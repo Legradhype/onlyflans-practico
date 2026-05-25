@@ -1,7 +1,7 @@
 const { param } = require('express-validator');
 
 const creatorIdParam = [
-  param('creatorId').isUUID().withMessage('Creator ID must be a UUID'),
+  param('creatorId').isUUID().withMessage('Creador debe ser un UUID válido'),
 ];
 
 module.exports = { creatorIdParam };

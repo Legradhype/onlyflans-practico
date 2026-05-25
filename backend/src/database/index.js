@@ -1,6 +1,5 @@
 const sequelize = require('../config/database');
 
-// Import all models
 const User = require('../modules/users/model/user.model');
 const CreatorProfile = require('../modules/creators/model/creatorProfile.model');
 const CreatorGoal = require('../modules/creators/model/creatorGoal.model');
@@ -10,29 +9,27 @@ const Post = require('../modules/posts/model/post.model');
 const Comment = require('../modules/comments/model/comment.model');
 const Donation = require('../modules/donations/model/donation.model');
 
-// ─── Associations ──────────────────────────────────────────────────────────────
 
-// User ↔ CreatorProfile (1:1)
+
 User.hasOne(CreatorProfile, { foreignKey: 'user_id', as: 'creatorProfile' });
 CreatorProfile.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
 
-// User → CreatorGoal (1:M)
+
 User.hasMany(CreatorGoal, { foreignKey: 'creator_id', as: 'goals' });
 CreatorGoal.belongsTo(User, { foreignKey: 'creator_id', as: 'creator' });
 
-// User → Post (1:M)
+
 User.hasMany(Post, { foreignKey: 'creator_id', as: 'posts' });
 Post.belongsTo(User, { foreignKey: 'creator_id', as: 'creator' });
 
-// User → Comment (1:M)
+
 User.hasMany(Comment, { foreignKey: 'user_id', as: 'comments' });
 Comment.belongsTo(User, { foreignKey: 'user_id', as: 'author' });
 
-// Post → Comment (1:M)
+
 Post.hasMany(Comment, { foreignKey: 'post_id', as: 'comments' });
 Comment.belongsTo(Post, { foreignKey: 'post_id', as: 'post' });
 
-// Follow: User (follower) ↔ User (creator)
 User.belongsToMany(User, {
   through: Follow,
   as: 'following',
@@ -46,7 +43,6 @@ User.belongsToMany(User, {
   otherKey: 'follower_id',
 });
 
-// Favorite: User (follower) ↔ User (creator)
 User.belongsToMany(User, {
   through: Favorite,
   as: 'favoritedCreators',
@@ -79,7 +75,7 @@ User.hasMany(Favorite, {
   as: 'favoritesMade',
 });
 
-// Donation: User (follower) → User (creator)
+
 User.hasMany(Donation, { foreignKey: 'follower_id', as: 'donationsMade' });
 User.hasMany(Donation, { foreignKey: 'creator_id', as: 'donationsReceived' });
 Donation.belongsTo(User, { foreignKey: 'follower_id', as: 'follower' });

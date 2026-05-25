@@ -8,12 +8,12 @@ const registerValidation = [
   body('name').trim().notEmpty().withMessage('Name is required'),
   body('role')
     .isIn(['CREATOR', 'FOLLOWER'])
-    .withMessage('Role must be CREATOR or FOLLOWER'),
+    .withMessage('Role must be either CREATOR or FOLLOWER'),
 ];
 
 const loginValidation = [
-  body('email').isEmail().withMessage('Valid email is required'),
-  body('password').notEmpty().withMessage('Password is required'),
+  body('email').isEmail().withMessage('email es requerido y debe ser válido'),
+  body('password').notEmpty().withMessage('Contraseña es requerida'),
 ];
 
 module.exports = { registerValidation, loginValidation };

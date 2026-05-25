@@ -21,14 +21,14 @@ class AuthService {
   async login({ email, password }) {
     const user = await userRepository.findByEmail(email);
     if (!user) {
-      const err = new Error('Invalid credentials');
+      const err = new Error('Credenciales invalidas');
       err.statusCode = 401;
       throw err;
     }
 
     const valid = await bcrypt.compare(password, user.password_hash);
     if (!valid) {
-      const err = new Error('Invalid credentials');
+      const err = new Error('Credenciales invalidas');
       err.statusCode = 401;
       throw err;
     }

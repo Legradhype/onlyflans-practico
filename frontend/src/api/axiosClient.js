@@ -6,7 +6,6 @@ const axiosClient = axios.create({
   timeout: 15000,
 })
 
-// Request interceptor — attach JWT token
 axiosClient.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('of_token')
@@ -18,7 +17,6 @@ axiosClient.interceptors.request.use(
   (error) => Promise.reject(error)
 )
 
-// Response interceptor — handle 401
 axiosClient.interceptors.response.use(
   (response) => response,
   (error) => {

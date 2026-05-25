@@ -4,7 +4,6 @@ const app = require('./app');
 const env = require('./config/env');
 const { sequelize } = require('./database');
 
-// Ensure uploads directory exists
 const uploadsDir = path.join(__dirname, '..', env.upload.dir);
 if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true });
@@ -13,18 +12,15 @@ if (!fs.existsSync(uploadsDir)) {
 const startServer = async () => {
   try {
     await sequelize.authenticate();
-    console.log('✅ Database connection established');
-
-    // Quitamos el alter: true para evitar el error 0A000 de PostgreSQL
-    // con la columna generada total_amount en la tabla donations
+    console.log('✅ Conexion estable de la base de datos establecida');
     await sequelize.sync();
-    console.log('✅ Models synchronized');
+    console.log('✅ Modelos sincronizados con la base de datos');
 
     app.listen(env.port, () => {
-      console.log(`🚀 OnlyFlans API running on port ${env.port} [${env.nodeEnv}]`);
+      console.log(`🚀 Puerto de OnlyFlans ${env.port} [${env.nodeEnv}]`);
     });
   } catch (error) {
-    console.error('❌ Failed to start server:', error);
+    console.error('❌ Fallo al iniciar el servidor:', error);
     process.exit(1);
   }
 };

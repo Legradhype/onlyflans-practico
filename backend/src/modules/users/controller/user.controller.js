@@ -4,7 +4,7 @@ const asyncHandler = require('../../../utils/asyncHandler');
 
 const getMe = asyncHandler(async (req, res) => {
   const user = await userService.getMe(req.user.id);
-  return sendSuccess(res, user, 'User retrieved');
+  return sendSuccess(res, user, 'Información del usuario obtenida');
 });
 
 module.exports = { getMe };

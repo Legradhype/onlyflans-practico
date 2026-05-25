@@ -20,7 +20,7 @@ const {
 
 const router = Router();
 
-// Creator-only static routes FIRST (must be before /:id)
+
 router.put(
   '/profile',
   authenticateToken,
@@ -59,7 +59,6 @@ router.get(
   getIncomeReport
 );
 
-// Public routes
 router.get('/', getAll);
 router.get('/:id', creatorIdParam, validate, getById);
 

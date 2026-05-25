@@ -26,13 +26,13 @@ class CommentService {
   async getByPost(postId, userId, query) {
     const post = await Post.findByPk(postId);
     if (!post) {
-      const err = new Error('Post not found');
+      const err = new Error('Post no encontrado');
       err.statusCode = 404;
       throw err;
     }
     if (post.creator_id !== userId) {
       const err = new Error('Solo el creador puede ver los comentarios de esta publicación');
-      err.statusCode = 403; // Forbidden
+      err.statusCode = 403;
       throw err;
     }
 

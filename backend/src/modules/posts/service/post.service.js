@@ -10,7 +10,7 @@ class PostService {
     if (file) data.image_url = `/uploads/${file.filename}`;
 
     if (!data.text_content && !data.image_url) {
-      const err = new Error('Post must have text content or an image');
+      const err = new Error('Posteaje debe tener texto o imagen');
       err.statusCode = 400;
       throw err;
     }
@@ -24,7 +24,7 @@ class PostService {
         where: { follower_id: followerId, creator_id: creatorId },
       });
       if (!donated) {
-        const err = new Error('You must donate to this creator to view their posts');
+        const err = new Error('Debes donar a este creador para ver sus posts');
         err.statusCode = 403;
         throw err;
       }
